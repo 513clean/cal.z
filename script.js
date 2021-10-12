@@ -15,6 +15,7 @@ class Calculator {
     this.currentOperand = this.currentOperand.toString().slice(0, -1)
   }
 
+
   appendNumber(number) {
     if (number === '.' && this.currentOperand.includes('.')) return
     this.currentOperand = this.currentOperand.toString() + number.toString()
@@ -80,7 +81,6 @@ class Calculator {
       this.previousOperandTextElement.innerText =
         `${this.getDisplayNumber(this.previousOperand)} ${this.operation}`
     } else {
-        console.log(1)
       this.previousOperandTextElement.innerText = ''
     }
   }
@@ -132,4 +132,12 @@ window.addEventListener("keyup",event=>{
       calculator.appendNumber(event.key)
       calculator.updateDisplay()
   }
- });
+  });
+
+  window.addEventListener("keydown",event=>{
+    console.log(event.key)
+  if(event.key == "Backspace"){
+    calculator.delete()
+    calculator.updateDisplay()
+  }
+});
