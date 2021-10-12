@@ -2,8 +2,10 @@ class Calculator {
   constructor(previousOperandTextElement, currentOperandTextElement) {
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
-    this.clear()
+      this.clear()
   }
+
+  
 
   clear() {
     this.currentOperand = ''
@@ -101,6 +103,8 @@ numberButtons.forEach(button => {
   button.addEventListener('click', () => {
     calculator.appendNumber(button.innerText)
     calculator.updateDisplay()
+    this.blur()
+    
   })
 })
 
@@ -108,23 +112,29 @@ operationButtons.forEach(button => {
   button.addEventListener('click', () => {
     calculator.chooseOperation(button.innerText)
     calculator.updateDisplay()
+    this.blur()
+    
   })
 })
 
 equalsButton.addEventListener('click', button => {
   calculator.compute()
   calculator.updateDisplay()
+  console.log(this);
 })
 
 allClearButton.addEventListener('click', button => {
   calculator.clear()
   calculator.updateDisplay()
+  this.blur()
 })
 
 deleteButton.addEventListener('click', button => {
   calculator.delete()
   calculator.updateDisplay()
+  this.blur()
 })
+
 
 window.addEventListener("keyup",event=>{
   console.log(event.key)
@@ -141,3 +151,12 @@ window.addEventListener("keyup",event=>{
     calculator.updateDisplay()
   }
 });
+window.addEventListener('keyup', event=>{
+  event.preventDefault()
+  console.log(event.key)
+  if(event.key == "enter"){
+    calculator.compute()
+    calculator.updateDisplay()
+  }
+});
+
